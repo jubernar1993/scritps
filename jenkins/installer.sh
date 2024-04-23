@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 ###This file will install & configure the jenkins controller.
-
+echo "Made this change as a test"
 echo "Now checking for updates"
 sleep 2
 echo "Adding Jenkins Repo"
