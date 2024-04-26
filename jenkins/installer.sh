@@ -59,5 +59,7 @@ sleep 4
 systemctl start jenkins && systemctl enable jenkins 
 clear
 echo "The ADMIN password of the jenkins instance is: $(cat /var/lib/jenkins/secrets/initialAdminPassword)"
-
-
+yum install httpd -y
+systemctl start httpd 
+systemctl enable httpd 
+echo "$(cat /var/lib/jenkins/secrets/initialAdminPassword)" >> /var/www/html/index.html 
