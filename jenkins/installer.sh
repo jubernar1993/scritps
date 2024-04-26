@@ -37,7 +37,6 @@ sleep 2
 clear 
 echo "Starting & Enabling Jenkins Deamon"
 sleep 2
-systemctl start jenkins && systemctl enable jenkins 
 sleep 2 
 echo "DONE"
 clear
@@ -45,12 +44,19 @@ echo "Adding Jenkins & Maven Variables to .bash_profile"
 sleep 2
 sed -i '9i\JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.402.b06-1.amzn2.0.1.x86_64"' /root/.bash_profile
 sed -i '10i\M2_HOME="/opt/maven"' /root/.bash_profile
-sed -i '9i\M2="/opt/maven/bin"' /root/.bash_profile
+sed -i '11i\M2="/opt/maven/bin"' /root/.bash_profile
 
-sed -i 's/^PATH=$PATH:$HOME\/bin/PATH=$PATH:$HOME\/bin:$JAVA_HOME:$M2_HOME:$M2/' /root/.bash_profile
+sed -i '12i\PATH=$PATH:$HOME\/bin/PATH=$PATH:$HOME\/bin:$JAVA_HOME:$M2_HOME:$M2/' /root/.bash_profile
 source /root/.bash_profile 
 echo "DONE"
 sleep 3
+echo "Now changing the Java Version!"
+sleep 2
+echo "1" | update-alternatives --config java
+sleep 2
+echo "1" | update-alternatives --config javac
+sleep 4
+systemctl start jenkins && systemctl enable jenkins 
 clear
 echo "The ADMIN password of the jenkins instance is: $(cat /var/lib/jenkins/secrets/initialAdminPassword)"
 
